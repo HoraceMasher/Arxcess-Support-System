@@ -1,0 +1,38 @@
+<section>
+  <div class="container mt-5">
+    <div class="card" *ngIf="ticket">
+      <div class="card-header">
+        <h5 class="ticket-title">{{ ticket.id }} <span>{{ ticket.name }}</span></h5>
+        <p class="ticket-subtitle">
+          <i class="bi bi-person-circle bi-lg"></i>
+          <span><a href="mailto:{{ ticket.email }}">{{ ticket.email }}</a></span>
+        </p>
+      </div>
+      <div class="card-body">
+        <p class="ticket-details">{{ ticket.message }}</p>
+      </div>
+      <div class="card-footer">
+        <p>Created: {{ ticket.dateCreated | date: 'medium' }}</p>
+        <p>Status: {{ ticket.status }}</p>
+        <button class="btn btn-primary" (click)="toggleTicketStatus()" *ngIf="ticket.status">
+          {{ ticket.status === 'Open' ? 'Close' : 'Open' }} Ticket
+        </button>
+      </div>
+    </div>
+
+    <!-- New message cards -->
+    <div class="card mt-3" *ngFor="let message of messageCards">
+      <div class="card-body">
+        <p class="ticket-details">{{ message }}</p>
+      </div>
+    </div>
+
+    <!-- New message input and button -->
+    <div class="card mt-3" *ngIf="ticket">
+      <div class="card-body">
+        <textarea class="form-control" [formControl]="newMessage" placeholder="Add a new message"></textarea>
+        <button class="btn btn-primary mt-3" (click)="addMessage()">Add Message</button>
+      </div>
+    </div>
+  </div>
+</section>

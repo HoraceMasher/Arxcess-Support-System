@@ -1,0 +1,60 @@
+<section>
+    <div class="container mt-4">
+        <div class="div new-ticket">
+        <a routerLink="/" style="text-decoration: none; font-size: 16px;"> <i class="bi bi-chevron-double-left"></i> Back To Tickets List</a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="card mt-5  ">
+            <div class="card-header" style="background-color: white;">
+                <p class="card-title mt-3">Simplify our work and get your problem solved in a haste, by chosing a relevant category related to your question</p>
+            </div>
+
+            <div class="card-body">
+                <div class="card-body" >
+      <form [formGroup]="ticketForm" (ngSubmit)="submitTicket()" >
+        <div class="mb-3">
+          <label for="ticketCategory" class="form-label">Category</label>
+          <select class="form-select" id="ticketCategory" formControlName="category" >
+            <option value="">Select category</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+        <div class="mb-3" *ngIf="ticketForm.get('category')?.value !== ''">
+          <label for="ticketSubcategory" class="form-label">Subcategory</label>
+          <select class="form-select" id="ticketSubcategory" formControlName="subcategory"
+          >
+            <option value="">Select subcategory</option>
+            <option *ngFor="let subcategory of subcategories" [value]="subcategory.id">{{ subcategory.name }}</option>
+          </select>
+        </div>
+        <div class="mb-3" *ngIf="ticketForm.get('subcategory')?.value !== ''">
+          <label for="ticketTertiarySubcategory" class="form-label">Tertiary Subcategory</label>
+          <select class="form-select" id="ticketTertiarySubcategory" formControlName="tertiarySubcategory">
+            <option value="">Select tertiary subcategory</option>
+            <option *ngFor="let tertiarySubcategory of tertiarySubcategories" [value]="tertiarySubcategory.id">
+              {{ tertiarySubcategory.name }}</option>
+          </select>
+        </div>
+        <div class="mb-3" *ngIf="ticketForm.get('tertiarySubcategory')?.value !== ''">
+          <label for="ticketSubject" class="form-label">Subject</label>
+          <input type="text" class="form-control" id="ticketSubject" formControlName="subject"
+            placeholder="Enter subject">
+        </div>
+        <div class="mb-3" *ngIf="ticketForm.get('tertiarySubcategory')?.value !== ''">
+          <label for="ticketMessage" class="form-label">Message</label>
+          <textarea class="form-control" id="ticketMessage" formControlName="message" rows="5"
+            placeholder="Enter your message"></textarea>
+        </div>
+        <div class="text-end" *ngIf="ticketForm.get('tertiarySubcategory')?.value !== ''">
+          <button type="submit" class="btn btn-primary">Submit Ticket</button>
+        </div>
+      </form>
+    </div>
+            </div>
+        </div>
+    </div>
+</section>
