@@ -1,0 +1,36 @@
+.sidebar {
+    height: max;
+  }
+  
+  .sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar .nav-link:hover {
+    background-color: #343a40;
+  }
+  
+  .sidebar .nav-link i {
+    margin-right: 10px;
+  }
+  
+  .sidebar .collapse .nav-link {
+    padding-left: 30px;
+  }
+  
+  .sidebar.collapsed .nav-link {
+    justify-content: center;
+  }
+  
+  .sidebar.collapsed .nav-link i {
+    margin-right: 0;
+  }
+  
+  .sidebar.collapsed .nav-link span {
+    display: none;
+  }
+  

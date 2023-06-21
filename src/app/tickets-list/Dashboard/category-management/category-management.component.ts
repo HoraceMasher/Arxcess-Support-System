@@ -68,18 +68,18 @@ export class CategoryManagementComponent implements OnInit {
             if (!parentCategory.subcategories) {
               parentCategory.subcategories = [];
             }
-            parentCategory.subcategories.push(createdCategory);
+            parentCategory.subcategories.unshift(createdCategory);
           }
         } else {
-          this.categories.push(createdCategory);
+          this.categories.unshift(createdCategory);
         }
 
         this.resetCategoryForm();
       },
       (error: any) => {
         console.error('Error creating category:', error);
-      }
-    );
+      
+      })
   }
 
   getCategoryName(categoryId: number | undefined): string {

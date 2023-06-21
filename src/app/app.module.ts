@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryManagementComponent } from './tickets-list/Dashboard/category-management/category-management.component';
 import { CategoryFormComponent } from './tickets-list/Dashboard/category-form/category-form.component';
 import { NavComponent } from './nav/nav.component';
+import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +23,7 @@ import { NavComponent } from './nav/nav.component';
     CategoryManagementComponent,
     CategoryFormComponent,
     NavComponent,
+    AdminSettingsComponent,
    
   ],
   imports: [
