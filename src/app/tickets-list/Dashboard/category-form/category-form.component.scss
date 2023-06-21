@@ -1,43 +1,44 @@
 
   section {
-    padding: 20px;
-    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
 
   .container {
-   max-width: 1000px;
- }
+    display: grid;
+    place-items: center;
+  }
 
   .card {
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
     border-radius: 8px;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .card:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
   .card-header {
-    background-color: white;
-    padding: 20px;
+    background-color: #f8f9fa;
+    padding: 10px;
     border-radius: 8px 8px 0 0;
   }
 
   .card-title {
-    font-size: 16px;
-    margin-bottom: 0;
+    font-weight: bold;
   }
 
   .card-body {
-    padding: 20px;
-  }
-
-  .form-container {
-    margin-bottom: 20px;
+    margin-top: 20px;
   }
 
   .form-group {
     margin-bottom: 20px;
-  }
-
-  .form-label {
-    font-weight: bold;
   }
 
   .form-control {
@@ -52,6 +53,11 @@
     outline: none;
     border-color: #80bdff;
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  .invalid-feedback {
+    color: red;
+    font-size: 14px;
   }
 
   .btn-primary {

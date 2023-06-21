@@ -29,7 +29,7 @@ export class TicketsService {
   }
   
 
-  submitTicket(ticketData: any) {
+  submitTicket(ticketData: any){
     const url = `${this.baseUrl}/support/category`;
     return this.http.post(url, ticketData);
   }

@@ -35,7 +35,7 @@ export class TicketsDetailsComponent implements OnInit {
   }
 
   toggleTicketStatus(): void {
-    // Implement the logic to toggle the ticket status (Open/Closed)
+    //  logic to toggle the ticket status (Open/Closed)
   }
 
   addMessage(): void {

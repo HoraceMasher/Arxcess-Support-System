@@ -1,0 +1,106 @@
+<div class="category-body">
+  <app-nav></app-nav>
+
+  <!-- Display Categories -->
+  <section>
+    <div class="container mt-5">
+          <!-- Add Category Button -->
+      
+         <div class="addCategory mb-3">
+          <button class="btn btn-primary btn-sm" (click)="openModal()">
+            <i class="fa fa-plus"></i> Add Category
+          </button>
+         </div>
+    
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped category-table">
+          <!-- Table Head -->
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>App</th>
+              <th>Parent Category</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <!-- Table Body -->
+          <tbody>
+            <!-- Category Rows -->
+            <ng-container *ngFor="let category of categories">
+              <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.description }}</td>
+                <td>{{ category.app }}</td>
+                <td>{{ getCategoryName(category.parentCategoryId) }}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)">
+                    <i class="fa fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+              <!-- Subcategory Rows -->
+              <tr *ngFor="let subcategory of category.subcategories">
+                <td>{{ subcategory.id }}</td>
+                <td>{{ subcategory.name }}</td>
+                <td>{{ subcategory.description }}</td>
+                <td>{{ subcategory.app }}</td>
+                <td>{{ getCategoryName(subcategory.parentCategoryId) }}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" (click)="deleteCategory(subcategory.id)">
+                    <i class="fa fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+  
+
+      <!-- Category Form Modal -->
+      <div class="modal" tabindex="-1" role="dialog" [ngClass]="{ 'd-block': isModalOpen }">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Category</h5>
+              <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- Category Form -->
+              <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
+                <div class="form-group">
+                  <label for="name">Name:</label>
+                  <input type="text" class="form-control" id="name" formControlName="name" required>
+                </div>
+                <div class="form-group">
+                  <label for="description">Description:</label>
+                  <input type="text" class="form-control" id="description" formControlName="description" required>
+                </div>
+                <div class="form-group">
+                  <label for="app">App:</label>
+                  <input type="text" class="form-control" id="app" formControlName="app" required>
+                </div>
+                <div class="form-group">
+                  <label for="parentCategory">Parent Category:</label>
+                  <select class="form-control" id="parentCategory" formControlName="parentCategoryId">
+                    <option value="0">None</option>
+                    <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">
+                  <i class="fa fa-plus"></i> Create Category
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
