@@ -26,96 +26,94 @@
           </thead>
           <!-- Table Body -->
           <tbody>
-           <!-- Category Rows -->
-<ng-container *ngFor="let category of categories">
-  <tr>
-    <td>{{ category.id }}</td>
-    <td>{{ category.name }}</td>
-    <td>{{ category.description }}</td>
-    <td>{{ category.app }}</td>
-    <td>{{ category.level }}</td>
-    <td>
-      <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)">
-        <i class="fa fa-trash"></i> Delete
-      </button>
-    </td>
-  </tr>
-  <!-- Subcategory Rows -->
-  <ng-container *ngIf="category.subcategories && category.subcategories.length > 0">
-    <tr *ngFor="let subcategory of category.subcategories">
-      <td>{{ subcategory.id }}</td>
-      <td>{{ subcategory.name }}</td>
-      <td>{{ subcategory.description }}</td>
-      <td>{{ subcategory.app }}</td>
-      <td>{{ getCategoryName(category.id) }}</td>
-      <td>
-        <button class="btn btn-danger btn-sm" (click)="deleteCategory(subcategory.id)">
-          <i class="fa fa-trash"></i> Delete
-        </button>
-      </td>
-    </tr>
-    <!-- Tertiary Subcategory Rows -->
-    <ng-container *ngIf="category.subcategories && category.subcategories.length > 0">
-      <tr *ngFor="let tertiarySubcategory of category.subcategories">
-        <td>{{ tertiarySubcategory.id }}</td>
-        <td>{{ tertiarySubcategory.name }}</td>
-        <td>{{ tertiarySubcategory.description }}</td>
-        <td>{{ tertiarySubcategory.app }}</td>
-        <td>{{ getCategoryName(category.id) }}</td>
-        <td>
-          <button class="btn btn-danger btn-sm" (click)="deleteCategory(tertiarySubcategory.id)">
-            <i class="fa fa-trash"></i> Delete
-          </button>
-        </td>
-      </tr>
-    </ng-container>
-  </ng-container>
-</ng-container>
-
+            <!-- Category Rows -->
+            <ng-container *ngFor="let category of categories">
+              <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>
+                  <button class="btn btn-link" (click)="openDescriptionModal(category)">
+                    Read Description
+                  </button>
+                </td>
+                <td>{{ category.app }}</td>
+                <td>{{ category.level }}</td>
+                <td>
+                  <button class="btn btn-danger btn-sm" (click)="deleteCategory(category.id)">
+                    <i class="fa fa-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
           </tbody>
         </table>
       </div>
+    </div>
+  </section>
 
-      <!-- Category Form Modal -->
-      <div class="modal" tabindex="-1" role="dialog" [ngClass]="{ 'd-block': isModalOpen }">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Add Category</h5>
-              <button type="button" class="close" aria-label="Close" (click)="closeModal()">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <!-- Category Form -->
-              <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
-                <div class="form-group">
-                  <label for="name">Name:</label>
-                  <input type="text" class="form-control" id="name" formControlName="name" required>
-                </div>
-                <div class="form-group">
-                  <label for="description">Description:</label>
-                  <input type="text" class="form-control" id="description" formControlName="description" required>
-                </div>
-                <div class="form-group">
-                  <label for="app">App:</label>
-                  <input type="text" class="form-control" id="app" formControlName="app" required>
-                </div>
-                <div class="form-group">
-                  <label for="parentCategory">Parent Category:</label>
-                  <select class="form-control" id="parentCategory" formControlName="parentCategoryId">
-                    <option value="0">None</option>
-                    <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">
-                  <i class="fa fa-plus"></i> Create Category
-                </button>
-              </form>
-            </div>
-          </div>
+  <!-- Modal for displaying description -->
+  <div class="modal fade" tabindex="-1" [ngClass]="{ 'show': isDescriptionModalOpen }" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Category Description</h5>
+          <button type="button" class="close" (click)="closeDescriptionModal()">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>{{ selectedCategory?.description }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeDescriptionModal()">Close</button>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- Category Form Modal -->
+  <div class="modal" tabindex="-1" role="dialog" [ngClass]="{ 'd-block': isModalOpen }">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Category</h5>
+          <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Category Form -->
+          <form [formGroup]="categoryForm" (ngSubmit)="createCategory()">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" id="name" formControlName="name" required>
+            </div>
+            <div class="form-group">
+              <label for="description">Description:</label>
+              <input type="text" class="form-control" id="description" formControlName="description" required>
+            </div>
+            <div class="form-group">
+              <label for="app">App:</label>
+              <select class="form-control" id="app" formControlName="app" required>
+                <option value="">Select an App</option>
+                <option value="banking">Arxcess Banking</option>
+                <option value="erp">Arxcess ERP</option>
+                <option value="hr">Arxcess HR</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="parentCategory">Parent Category:</label>
+              <select class="form-control" id="parentCategory" formControlName="parentCategoryId">
+                <option value="0">None</option>
+                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">
+              <i class="fa fa-plus"></i> Create Category
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

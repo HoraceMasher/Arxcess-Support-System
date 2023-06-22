@@ -110,4 +110,17 @@ export class CategoryManagementComponent implements OnInit {
   resetCategoryForm(): void {
     this.categoryForm.reset();
   }
+
+selectedCategory: any; // Property to store the currently selected category
+isDescriptionModalOpen = false; // Flag to track the modal open state
+
+openDescriptionModal(category: any) {
+  this.selectedCategory = category;
+  this.isDescriptionModalOpen = true;
+}
+
+closeDescriptionModal() {
+  this.isDescriptionModalOpen = false;
+}
+
 }
