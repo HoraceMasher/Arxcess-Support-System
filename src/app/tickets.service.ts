@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './constants/environments';
-
 import { Observable } from 'rxjs';
 import { Ticket } from './Tickets.model';
 
@@ -9,41 +8,55 @@ import { Ticket } from './Tickets.model';
   providedIn: 'root'
 })
 export class TicketsService {
-  private baseUrl: string= environment.baseUrl; 
+  private baseUrl: string = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
-  getCategories() {
+  getCategories(): Observable<any> {
     const url = `${this.baseUrl}/support/category`;
     return this.http.get(url);
   }
 
-  getSubcategories(categoryId: string) {
-    const url = `${this.baseUrl}/support/category/${categoryId}`;
+  getSubcategories(categoryId: string): Observable<any> {
+    const url = `${this.baseUrl}/support/category/subcategory/${categoryId}`;
     return this.http.get(url);
   }
   
-  getTertiarySubcategories(subcategoryId: string) {
+
+  getTertiarySubcategories(subcategoryId: string): Observable<any> {
     const url = `${this.baseUrl}/support/category/subcategory/${subcategoryId}`;
     return this.http.get(url);
   }
-  
 
-  submitTicket(ticketData: any){
-    const url = `${this.baseUrl}/support/category`;
+  submitTicket(ticketData: any): Observable<any> {
+    const url = `${this.baseUrl}/support/ticket/me`;
     return this.http.post(url, ticketData);
   }
 
-
   getTicket(ticketId: string): Observable<Ticket> {
-    return this.http.get<Ticket>(`/api/tickets/${ticketId}`);
+    const url = `${this.baseUrl}/support/ticket/me/${ticketId}`;
+    return this.http.get<Ticket>(url);
   }
 
   toggleTicketStatus(ticketId: string): Observable<any> {
-    return this.http.patch(`/api/tickets/${ticketId}/toggle-status`, null);
+    const url = `${this.baseUrl}/support/ticket/me/${ticketId}/toggle-status`;
+    return this.http.patch(url, null);
   }
 
   addMessage(ticketId: string, message: string): Observable<any> {
-    return this.http.post(`/api/tickets/${ticketId}/messages`, { message });
+    const url = `${this.baseUrl}/support/ticket/me/${ticketId}/messages`;
+    return this.http.post(url, { message });
+  }
+
+  attachFile(ticketId: string, file: File): Observable<any> {
+    const url = `${this.baseUrl}/support/ticket/me/file/${ticketId}`;
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.put(url, formData);
+  }
+
+  updateTicket(ticketId: string, ticketData: any): Observable<any> {
+    const url = `${this.baseUrl}/support/ticket/me/${ticketId}`;
+    return this.http.put(url, ticketData);
   }
 }

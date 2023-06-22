@@ -5,5 +5,6 @@ export interface Category {
     app: string;
     parentCategoryId?: number;
     subcategories?: any[];
+    level: number;
   }
   

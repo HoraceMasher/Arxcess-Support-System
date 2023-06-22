@@ -40,7 +40,8 @@ export class CategoryFormComponent implements OnInit {
       description: this.categoryForm?.value.description,
       app: this.categoryForm?.value.app,
       parentCategoryId: this.categoryForm?.value.parentCategoryId,
-      id: 0
+      id: 0,
+      level: 0
     };
 
   

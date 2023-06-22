@@ -78,8 +78,8 @@ export class CategoryManagementComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error creating category:', error);
-      
-      })
+      }
+    );
   }
 
   getCategoryName(categoryId: number | undefined): string {

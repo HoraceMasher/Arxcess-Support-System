@@ -29,25 +29,55 @@ export class TicketsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
+
+      // Subscribe to category value changes
+      this.ticketForm.get('category')?.valueChanges.subscribe((categoryId: string) => {
+        if (categoryId) {
+          this.loadSubcategories(categoryId);
+        } else {
+          this.subcategories = []; // Clear subcategories if no category is selected
+        }
+      });
+
+      this.ticketForm.get('subcategory')?.valueChanges.subscribe((subcategoryId: string) =>{
+        if (subcategoryId) {
+          this.loadTertiarySubcategories(subcategoryId);
+        } else {
+          this.tertiarySubcategories = []; // Clear Tertiary subcategories 
+        }
+      }
+      );
   }
 
   loadCategories(): void {
     this.ticketsService.getCategories().subscribe((response: any) => {
-      this.categories = response.categories;
-    });
-}  
-  
+      this.categories = response.data ;
+    },
+    (error: any) => {
+      console.error('Failed to load categories:', error);
+    }
+      );
+  }
 
   loadSubcategories(categoryId: string): void {
-    this.ticketsService.getSubcategories(categoryId).subscribe((subcategories: any) => {
-      this.subcategories = subcategories;
-    });
+    this.ticketsService.getSubcategories(categoryId).subscribe(
+      (response: any) => {
+        this.subcategories = response.data;
+      },
+      (error: any) => {
+        console.error('Failed to load subcategories:', error);
+      }
+    );
   }
 
   loadTertiarySubcategories(subcategoryId: string): void {
-    this.ticketsService.getTertiarySubcategories(subcategoryId).subscribe((tertiarySubcategories: any) => {
-      this.tertiarySubcategories = tertiarySubcategories;
-    });
+    this.ticketsService.getTertiarySubcategories(subcategoryId).subscribe((response: any) => {
+      this.tertiarySubcategories = response.data;
+    },
+    (error: any) => {
+      console.error('Failed to load subcategories:', error);
+    }
+    );
   }
 
   submitTicket(): void {
