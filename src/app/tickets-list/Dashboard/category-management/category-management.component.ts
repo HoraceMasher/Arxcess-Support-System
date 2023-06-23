@@ -12,6 +12,8 @@ export class CategoryManagementComponent implements OnInit {
   categories: Category[] = [];
   categoryForm!: FormGroup;
   isModalOpen = false;
+  jwtToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzdXBwb3J0LmNvbSIsImlhdCI6MTY4NzUyNDc3NywiZ3JvdXBzIjpbIkFETUlOIl0sInVwbiI6ImFkbWluIiwiaXNzIjoic3VwcG9ydCBzZXJ2ZXIiLCJleHAiOjE2ODc2MTExNzcsImp0aSI6IjRiNTNiYWJhLTE5YTAtNGM5NC1hOGRlLTVjMTI0OGIzODE0NyJ9.CshfS9_l6id370Q2MAH6n0q3sebjQtbcBNtDn-LBRos';
+
 
   constructor(private categoryService: CategoryService) {}
 
@@ -29,7 +31,7 @@ export class CategoryManagementComponent implements OnInit {
   }
 
   getCategories(): void {
-    this.categoryService.getCategories().subscribe(
+    this.categoryService.getCategories(this.jwtToken).subscribe(
       (categories: any) => {
         console.log(categories);
         this.categories = categories.data;
@@ -60,7 +62,7 @@ export class CategoryManagementComponent implements OnInit {
     }
 
     const category: Category = this.categoryForm.value;
-    this.categoryService.createCategory(category).subscribe(
+    this.categoryService.createCategory(category, this.jwtToken).subscribe(
       (createdCategory: Category) => {
         if (category.parentCategoryId) {
           const parentCategory = this.categories.find((cat) => cat.id === category.parentCategoryId);
@@ -92,7 +94,7 @@ export class CategoryManagementComponent implements OnInit {
   }
 
   deleteCategory(categoryId: number): void {
-    this.categoryService.deleteCategory(categoryId).subscribe(
+    this.categoryService.deleteCategory(categoryId, this.jwtToken).subscribe(
       () => {
         this.categories = this.categories.filter((cat) => cat.id !== categoryId);
         this.categories.forEach((cat) => {

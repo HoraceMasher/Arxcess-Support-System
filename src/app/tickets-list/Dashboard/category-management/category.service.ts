@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/app/constants/environments';
-import { Category } from './Category.model'
+import { Category } from './Category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,33 +12,39 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  createCategory(category: Category): Observable<Category> {
+  createCategory(category: Category, jwtToken: string): Observable<Category> {
     const url = `${this.baseUrl}/support/category`;
-    return this.http.post<Category>(url, category);
+    const headers = { 'Authorization': `Bearer ${jwtToken}` };
+    return this.http.post<Category>(url, category, { headers });
   }
 
-  getCategories(): Observable<Category[]> {
+  getCategories(jwtToken: string): Observable<Category[]> {
     const url = `${this.baseUrl}/support/category`;
-    return this.http.get<Category[]>(url);
+    const headers = { 'Authorization': `Bearer ${jwtToken}` };
+    return this.http.get<Category[]>(url, { headers });
   }
 
-  getCategory(id: number): Observable<Category> {
+  getCategory(id: number, jwtToken: string): Observable<Category> {
     const url = `${this.baseUrl}/support/category/${id}`;
-    return this.http.get<Category>(url);
+    const headers = { 'Authorization': `Bearer ${jwtToken}` };
+    return this.http.get<Category>(url, { headers });
   }
 
-  getCategorySubcategories(id: number): Observable<Category[]> {
+  getCategorySubcategories(id: number, jwtToken: string): Observable<Category[]> {
     const url = `${this.baseUrl}/support/category/subcategory/${id}`;
-    return this.http.get<Category[]>(url);
+    const headers = { 'Authorization': `Bearer ${jwtToken}` };
+    return this.http.get<Category[]>(url, { headers });
   }
 
-  updateCategory(id: number, category: Category): Observable<Category> {
+  updateCategory(id: number, category: Category, jwtToken: string): Observable<Category> {
     const url = `${this.baseUrl}/support/category/${id}`;
-    return this.http.put<Category>(url, category);
+    const headers = { 'Authorization': `Bearer ${jwtToken}` };
+    return this.http.put<Category>(url, category, { headers });
   }
 
-  deleteCategory(id: number): Observable<void> {
+  deleteCategory(id: number, jwtToken: string): Observable<void> {
     const url = `${this.baseUrl}/support/category/${id}`;
-    return this.http.delete<void>(url);
+    const headers = { 'Authorization': `Bearer ${jwtToken}` };
+    return this.http.delete<void>(url, { headers });
   }
 }

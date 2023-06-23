@@ -13,6 +13,7 @@ export class TicketsFormComponent implements OnInit {
   categories: Ticket[] = [];
   subcategories: Ticket[] = [];
   tertiarySubcategories: Ticket[] = [];
+ userJwtToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcnAiLCJpYXQiOjE2ODc1NDYxODYsImJ1c2luZXNzIjoibWFjJ24gbWF4IiwiZ3JvdXBzIjpbIkNVU1RPTUVSIl0sInVwbiI6ImRlbW9AYWNjb3VudC5jb20iLCJpc3MiOiJzdXBwb3J0IHNlcnZlciIsImV4cCI6MTY4NzU0OTc4NiwianRpIjoiZmZjMGMzY2ItOTM1ZC00ZTJiLWE2YTctMjQ0OGRlMmU1ZGZhIn0.T0s1C8WVAsIVtqeGwuOp7uPBA9sJIMemMFKPUdDXwZQ';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,7 +51,7 @@ export class TicketsFormComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.ticketsService.getCategories().subscribe((response: any) => {
+    this.ticketsService.getCategories(this.userJwtToken).subscribe((response: any) => {
       this.categories = response.data ;
     },
     (error: any) => {
@@ -60,7 +61,7 @@ export class TicketsFormComponent implements OnInit {
   }
 
   loadSubcategories(categoryId: string): void {
-    this.ticketsService.getSubcategories(categoryId).subscribe(
+    this.ticketsService.getSubcategories(categoryId, this.userJwtToken).subscribe(
       (response: any) => {
         this.subcategories = response.data;
       },
@@ -71,7 +72,7 @@ export class TicketsFormComponent implements OnInit {
   }
 
   loadTertiarySubcategories(subcategoryId: string): void {
-    this.ticketsService.getTertiarySubcategories(subcategoryId).subscribe((response: any) => {
+    this.ticketsService.getTertiarySubcategories(subcategoryId, this.userJwtToken).subscribe((response: any) => {
       this.tertiarySubcategories = response.data;
     },
     (error: any) => {
@@ -83,7 +84,7 @@ export class TicketsFormComponent implements OnInit {
   submitTicket(): void {
     if (this.ticketForm.valid) {
       const ticketData = this.ticketForm.value;
-      this.ticketsService.submitTicket(ticketData).subscribe(response => {
+      this.ticketsService.submitTicket(ticketData, this.userJwtToken).subscribe(response => {
         // Handle the response as needed
       });
     }

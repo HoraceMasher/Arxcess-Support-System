@@ -12,51 +12,59 @@ export class TicketsService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories(): Observable<any> {
+  getCategories(userJwtToken: string): Observable<any> {
     const url = `${this.baseUrl}/support/category`;
-    return this.http.get(url);
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
+    return this.http.get(url, { headers });
   }
 
-  getSubcategories(categoryId: string): Observable<any> {
+  getSubcategories(categoryId: string, userJwtToken: string): Observable<any> {
     const url = `${this.baseUrl}/support/category/subcategory/${categoryId}`;
-    return this.http.get(url);
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
+    return this.http.get(url, { headers });
   }
   
-
-  getTertiarySubcategories(subcategoryId: string): Observable<any> {
+  getTertiarySubcategories(subcategoryId: string, userJwtToken: string): Observable<any> {
     const url = `${this.baseUrl}/support/category/subcategory/${subcategoryId}`;
-    return this.http.get(url);
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
+    return this.http.get(url, { headers });
   }
 
-  submitTicket(ticketData: any): Observable<any> {
+  submitTicket(ticketData: any, userJwtToken: string): Observable<any> {
     const url = `${this.baseUrl}/support/ticket/me`;
-    return this.http.post(url, ticketData);
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
+    return this.http.post(url, ticketData, { headers });
   }
 
-  getTicket(ticketId: string): Observable<Ticket> {
+  getTicket(ticketId: string, userJwtToken: string): Observable<Ticket> {
     const url = `${this.baseUrl}/support/ticket/me/${ticketId}`;
-    return this.http.get<Ticket>(url);
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
+    return this.http.get<Ticket>(url, { headers });
   }
 
-  toggleTicketStatus(ticketId: string): Observable<any> {
+  toggleTicketStatus(ticketId: string, userJwtToken: string): Observable<any> {
     const url = `${this.baseUrl}/support/ticket/me/${ticketId}/toggle-status`;
-    return this.http.patch(url, null);
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
+    return this.http.patch(url, null, { headers });
   }
 
-  addMessage(ticketId: string, message: string): Observable<any> {
+  addMessage(ticketId: string, message: string, userJwtToken: string): Observable<any> {
     const url = `${this.baseUrl}/support/ticket/me/${ticketId}/messages`;
-    return this.http.post(url, { message });
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
+    return this.http.post(url, { message }, { headers });
   }
 
-  attachFile(ticketId: string, file: File): Observable<any> {
+  attachFile(ticketId: string, file: File, userJwtToken: string): Observable<any> {
     const url = `${this.baseUrl}/support/ticket/me/file/${ticketId}`;
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.put(url, formData);
+    return this.http.put(url, formData, { headers });
   }
 
-  updateTicket(ticketId: string, ticketData: any): Observable<any> {
+  updateTicket(ticketId: string, ticketData: any, userJwtToken: string): Observable<any> {
     const url = `${this.baseUrl}/support/ticket/me/${ticketId}`;
-    return this.http.put(url, ticketData);
+    const headers = { 'Authorization': `Bearer ${userJwtToken}` };
+    return this.http.put(url, ticketData, { headers });
   }
 }

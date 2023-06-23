@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { TicketsService } from './tickets.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +13,11 @@ import { CategoryManagementComponent } from './tickets-list/Dashboard/category-m
 import { CategoryFormComponent } from './tickets-list/Dashboard/category-form/category-form.component';
 import { NavComponent } from './nav/nav.component';
 import { AdminSettingsComponent } from './admin-settings/admin-settings.component';
+import { LoginComponent } from './auth/login/login.component';
+import { UserLoginComponent } from './auth/user-login/user-login.component';
+import { AuthService } from './auth/auth.service';
+import { JwtInterceptor } from './interceptor/jwt.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +28,8 @@ import { AdminSettingsComponent } from './admin-settings/admin-settings.componen
     CategoryFormComponent,
     NavComponent,
     AdminSettingsComponent,
+    LoginComponent,
+    UserLoginComponent
    
   ],
   imports: [
@@ -35,7 +41,13 @@ import { AdminSettingsComponent } from './admin-settings/admin-settings.componen
     NgbModule
    
   ],
-  providers: [ TicketsService],
+  providers: [HttpClient, AuthService,
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
