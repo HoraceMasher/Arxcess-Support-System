@@ -13,7 +13,7 @@ export class TicketsFormComponent implements OnInit {
   categories: Ticket[] = [];
   subcategories: Ticket[] = [];
   tertiarySubcategories: Ticket[] = [];
- userJwtToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcnAiLCJpYXQiOjE2ODc1NDYxODYsImJ1c2luZXNzIjoibWFjJ24gbWF4IiwiZ3JvdXBzIjpbIkNVU1RPTUVSIl0sInVwbiI6ImRlbW9AYWNjb3VudC5jb20iLCJpc3MiOiJzdXBwb3J0IHNlcnZlciIsImV4cCI6MTY4NzU0OTc4NiwianRpIjoiZmZjMGMzY2ItOTM1ZC00ZTJiLWE2YTctMjQ0OGRlMmU1ZGZhIn0.T0s1C8WVAsIVtqeGwuOp7uPBA9sJIMemMFKPUdDXwZQ';
+  userJwtToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcnAiLCJpYXQiOjE2ODc1OTA3NzksImJ1c2luZXNzIjoibWFjJ24gbWF4IiwiZ3JvdXBzIjpbIkNVU1RPTUVSIl0sInVwbiI6ImRlbW9AYWNjb3VudC5jb20iLCJpc3MiOiJzdXBwb3J0IHNlcnZlciIsImV4cCI6MTY4NzU5NDM3OSwianRpIjoiNGE2YjI3MDctYTkyOS00MjhhLWFiMTQtYTg4YzY3ZDQ3YmQ5In0.IJFh2tw7y-DHLY_j-CSLaCwb-wcCeUDY6Aex55h5ISk'
 
   constructor(
     private formBuilder: FormBuilder,
@@ -84,9 +84,19 @@ export class TicketsFormComponent implements OnInit {
   submitTicket(): void {
     if (this.ticketForm.valid) {
       const ticketData = this.ticketForm.value;
-      this.ticketsService.submitTicket(ticketData, this.userJwtToken).subscribe(response => {
-        // Handle the response as needed
-      });
+      this.ticketsService.submitTicket(ticketData, this.userJwtToken).subscribe(
+        (response: any) => {
+
+        },
+        (error: any) => {
+          console.error('Failed to submit the ticket:', error);
+        
+        }
+      );
+    } else {
+      console.error('Invalid form data. Please fill in all required fields.');
+
     }
   }
+  
 }

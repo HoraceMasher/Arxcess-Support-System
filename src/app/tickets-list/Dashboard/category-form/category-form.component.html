@@ -1,61 +1,80 @@
 <section>
-    <div class="container col-md-6 mt-5">
-      <div class="card shadow">
-        <div class="card-header">
-          <div class="card-title">
-            Create Category
-          </div>
-        </div>
-  
-        <div class="card-body">
-          <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="app">App:</label>
-                  <select id="app" formControlName="app" class="form-control" required>
-                    <option value="">Select App</option>
-                    <option value="banking">Banking</option>
-                    <option value="erp">ERP</option>
-                    <option value="hr">HR</option>
-                  </select>
-                  <div class="invalid-feedback" *ngIf="categoryForm.get('app')?.invalid && categoryForm.get('app')?.touched">
-                    App is required.
-                  </div>
-                </div>
-              </div>
-  
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="id">ID:</label>
-                  <input id="id" type="text" formControlName="parentCategoryId" class="form-control" required>
-                  <div class="invalid-feedback" *ngIf="categoryForm.get('parentCategoryId')?.invalid && categoryForm.get('parentCategoryId')?.touched">
-                    ID is required.
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input id="name" type="text" formControlName="name" class="form-control" required>
-              <div class="invalid-feedback" *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
-                Name is required.
-              </div>
-            </div>
-  
-            <div class="form-group">
-              <label for="description">Description:</label>
-              <input id="description" type="text" formControlName="description" class="form-control" required>
-              <div class="invalid-feedback" *ngIf="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched">
-                Description is required.
-              </div>
-            </div>
-  
-            <button type="submit" class="btn btn-primary mt-4" [disabled]="categoryForm.invalid">Create</button>
-          </form>
+  <div class="container col-md-6 mt-5">
+    <div class="card shadow">
+      <div class="card-header">
+        <div class="card-title">
+          Create Category
         </div>
       </div>
+
+      <div class="card-body">
+        <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="app">App:</label>
+                <select id="app" formControlName="app" class="form-control" required>
+                  <option value="">Select App</option>
+                  <option value="banking">Banking</option>
+                  <option value="erp">ERP</option>
+                  <option value="hr">HR</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="categoryForm.get('app')?.invalid && categoryForm.get('app')?.touched">
+                  App is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="parentCategoryId">ID:</label>
+                <input id="parentCategoryId" type="text" formControlName="parentCategoryId" class="form-control" required>
+                <div class="invalid-feedback" *ngIf="categoryForm.get('parentCategoryId')?.invalid && categoryForm.get('parentCategoryId')?.touched">
+                  ID is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" type="text" formControlName="name" class="form-control" required>
+            <div class="invalid-feedback" *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
+              Name is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <input id="description" type="text" formControlName="description" class="form-control" required>
+            <div class="invalid-feedback" *ngIf="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched">
+              Description is required.
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="subcategory">Subcategory:</label>
+            <div class="input-group">
+              <select id="subcategory" formControlName="subcategory" class="form-control" required>
+                <option value="">Select Subcategory</option>
+                <option value="add">Add</option>
+                <option value="subtract">Subtract</option>
+              </select>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="onSubcategoryAction(categoryForm.get('subcategory')?.value)">
+                  <i class="fas fa-plus" *ngIf="categoryForm.get('subcategory')?.value === 'add'"></i>
+                  <i class="fas fa-minus" *ngIf="categoryForm.get('subcategory')?.value === 'subtract'"></i>
+                </button>
+              </div>
+            </div>
+            <div class="invalid-feedback" *ngIf="categoryForm.get('subcategory')?.invalid && categoryForm.get('subcategory')?.touched">
+              Subcategory is required.
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-4" [disabled]="categoryForm.invalid">Create</button>
+        </form>
+      </div>
     </div>
-  </section>
-  
+  </div>
+</section>
