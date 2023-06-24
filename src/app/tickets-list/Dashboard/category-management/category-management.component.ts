@@ -77,6 +77,7 @@ export class CategoryManagementComponent implements OnInit {
         }
 
         this.resetCategoryForm();
+        this.isModalOpen = false; // Close the modal after category creation
       },
       (error: any) => {
         console.error('Error creating category:', error);
@@ -113,16 +114,15 @@ export class CategoryManagementComponent implements OnInit {
     this.categoryForm.reset();
   }
 
-selectedCategory: any; // Property to store the currently selected category
-isDescriptionModalOpen = false; // Flag to track the modal open state
+  selectedCategory: any; // Property to store the currently selected category
+  isDescriptionModalOpen = false; // Flag to track the modal open state
 
-openDescriptionModal(category: any) {
-  this.selectedCategory = category;
-  this.isDescriptionModalOpen = true;
-}
+  openDescriptionModal(category: any) {
+    this.selectedCategory = category;
+    this.isDescriptionModalOpen = true;
+  }
 
-closeDescriptionModal() {
-  this.isDescriptionModalOpen = false;
-}
-
+  closeDescriptionModal() {
+    this.isDescriptionModalOpen = false;
+  }
 }
