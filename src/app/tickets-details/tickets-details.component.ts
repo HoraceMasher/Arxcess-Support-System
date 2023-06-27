@@ -13,8 +13,7 @@ export class TicketsDetailsComponent implements OnInit {
   ticket: Ticket | null = null;
   messageCards: string[] = [];
   newMessage = new FormControl('');
-  userJwtToken ='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcnAiLCJpYXQiOjE2ODc1OTA3NzksImJ1c2luZXNzIjoibWFjJ24gbWF4IiwiZ3JvdXBzIjpbIkNVU1RPTUVSIl0sInVwbiI6ImRlbW9AYWNjb3VudC5jb20iLCJpc3MiOiJzdXBwb3J0IHNlcnZlciIsImV4cCI6MTY4NzU5NDM3OSwianRpIjoiNGE2YjI3MDctYTkyOS00MjhhLWFiMTQtYTg4YzY3ZDQ3YmQ5In0.IJFh2tw7y-DHLY_j-CSLaCwb-wcCeUDY6Aex55h5ISk'
-
+  userJwtToken ='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlcnAiLCJpYXQiOjE2ODc3OTcxNjUsImJ1c2luZXNzIjoibWFjJ24gbWF4IiwiZ3JvdXBzIjpbIkNVU1RPTUVSIl0sInVwbiI6ImRlbW9AYWNjb3VudC5jb20iLCJpc3MiOiJzdXBwb3J0IHNlcnZlciIsImV4cCI6MTY4NzgwMDc2NSwianRpIjoiYTE4Y2Y2NTQtZDY5Ny00ZDNkLTlmMTYtODEyM2I5Zjc4MzJlIn0.tmYaHuUByrEOf_k5j8PTaYUMu7owiPW-ZkqrK2tNfTk'
   constructor(
     private route: ActivatedRoute,
     private ticketsService: TicketsService

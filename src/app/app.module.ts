@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { HttpClient, HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TicketsListComponent } from './tickets-list/tickets-list.component';
 import { TicketsFormComponent } from './tickets-form/tickets-form.component';
 import { TicketsDetailsComponent } from './tickets-details/tickets-details.component';
@@ -29,7 +32,8 @@ import { JwtInterceptor } from './interceptor/jwt.interceptor';
     NavComponent,
     AdminSettingsComponent,
     LoginComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    
    
   ],
   imports: [
@@ -38,7 +42,10 @@ import { JwtInterceptor } from './interceptor/jwt.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    MatButtonModule,
+    MatIconModule,
+    MatProgressBarModule
    
   ],
   providers: [HttpClient, AuthService,

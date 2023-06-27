@@ -12,7 +12,7 @@ export class CategoryManagementComponent implements OnInit {
   categories: Category[] = [];
   categoryForm!: FormGroup;
   isModalOpen = false;
-  jwtToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzdXBwb3J0LmNvbSIsImlhdCI6MTY4NzUyNDc3NywiZ3JvdXBzIjpbIkFETUlOIl0sInVwbiI6ImFkbWluIiwiaXNzIjoic3VwcG9ydCBzZXJ2ZXIiLCJleHAiOjE2ODc2MTExNzcsImp0aSI6IjRiNTNiYWJhLTE5YTAtNGM5NC1hOGRlLTVjMTI0OGIzODE0NyJ9.CshfS9_l6id370Q2MAH6n0q3sebjQtbcBNtDn-LBRos';
+  jwtToken = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBzdXBwb3J0LmNvbSIsImlhdCI6MTY4Nzc1NjU1MSwiZ3JvdXBzIjpbIkFETUlOIl0sInVwbiI6ImFkbWluIiwiaXNzIjoic3VwcG9ydCBzZXJ2ZXIiLCJleHAiOjE2ODc4NDI5NTEsImp0aSI6IjhmNTlmZDIzLThmY2EtNGYxYi1iMTU5LWFkMzJiOTU5MzViYyJ9.AFRKSH6o4gE2aWZ17bFPJJGCyoRLJHBjrDZSpeJwvFc'
 
 
   constructor(private categoryService: CategoryService) {}

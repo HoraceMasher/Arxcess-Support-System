@@ -67,3 +67,91 @@
   .btn-primary:hover {
     background-color: #0056b3;
   }
+
+  .fie-input{
+    display: none;
+  }
+  .attachment-container {
+    position: relative;
+    display: inline-block;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .attachment-container:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .attachment-label {
+    display: flex;
+    align-items: center;
+    color: #777;
+  }
+  
+  .attachment-label i {
+    margin-right: 5px;
+  }
+  
+  .attachment-placeholder {
+    color: #777;
+  }
+  
+  .selected-file {
+    margin-top: 10px;
+  }
+  
+  .selected-file span {
+    display: inline-block;
+    max-width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #333;
+  }
+  
+  .selected-file button {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #777;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .progress {
+    margin-top: 10px;
+    height: 8px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #4caf50;
+  }
+  
+  .cancel-upload {
+    margin-left: 5px;
+    color: #f44336;
+    cursor: pointer;
+  }
+  
+  .progress {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .progress-bar {
+    flex-grow: 1;
+  }
+  
+  .cancel-upload {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  

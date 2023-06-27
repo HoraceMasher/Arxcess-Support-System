@@ -49,6 +49,31 @@
               <label for="ticketMessage" class="form-label">Message</label>
               <textarea class="form-control" id="ticketMessage" formControlName="message" rows="5" placeholder="Enter your message"></textarea>
             </div>
+
+            <!-- Attachment -->
+            <div class="form-group" *ngIf="ticketForm.get('tertiarySubcategory')?.value !== ''">
+              <label for="ticketAttachment" class="form-label">Attachment</label>
+              <div class="attachment-container m-4">
+                <span> <i class="bi bi-paperclip"></i> </span>
+                <input type="file" class="form-control-file" accept="{{ requiredFileType }}" (change)="onFileSelected($event)" id="ticketAttachment" #fileUpload>
+              </div>
+              <div class="selected-file" *ngIf="fileName">
+                <span>{{ fileName }}</span>
+                <button class="btn btn-link" (click)="clearFile()">Clear</button>
+              </div>
+            </div>
+            <div class="progress">
+
+              <mat-progress-bar class="progress-bar" mode="determinate"
+                                [value]="uploadProgress" *ngIf="uploadProgress">
+            
+              </mat-progress-bar>
+            
+              <mat-icon class="cancel-upload" (click)="cancelUpload()" 
+                        *ngIf="uploadProgress">delete_forever</mat-icon>
+            
+            </div>
+
             <div class="text-end" *ngIf="ticketForm.get('tertiarySubcategory')?.value !== ''">
               <button type="submit" class="btn btn-primary">Submit Ticket</button>
             </div>
